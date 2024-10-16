@@ -3,25 +3,19 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PWA - WhatsGo</title>
+    <title>WhatsGo PWA</title>
     <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#000000">
     <link rel="stylesheet" href="styles.css">
-    <script>
-        // Registrar o Service Worker
-        if ('serviceWorker' in navigator) {
-            window.addEventListener('load', () => {
-                navigator.serviceWorker.register('sw.js')
-                    .then(reg => console.log('Service Worker registrado com sucesso:', reg))
-                    .catch(err => console.error('Erro ao registrar o Service Worker:', err));
-            });
-        }
-    </script>
 </head>
 <body>
-    <h1>Baixe o WhatsGo</h1>
-    <p>Clique no botão abaixo para acessar o WhatsGo:</p>
-    <a href="https://www.whatsgo.app.br" target="_blank">
-        <button>Acessar WhatsGo</button>
-    </a>
+    <header>
+        <h1>Bem-vindo ao WhatsGo</h1>
+    </header>
+    <main>
+        <p>Este é um exemplo simples de PWA para o WhatsGo.</p>
+        <button id="install-button" style="display: none;">Instalar App</button>
+    </main>
+    <script src="app.js"></script>
 </body>
 </html>
