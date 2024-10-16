@@ -2,84 +2,23 @@
 <html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>WhatsGo</title>
-    
-    <!-- Meta tags universais -->
-    <meta name="description" content="WhatsGo - Seu aplicativo de comunicação">
-    <meta name="theme-color" content="#000000">
-    <meta name="mobile-web-app-capable" content="yes">
     <link rel="manifest" href="/manifest.json">
-
-    <!-- Meta tags para iOS -->
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="black">
-    <meta name="apple-mobile-web-app-title" content="WhatsGo">
+    <link rel="stylesheet" href="/css/styles.css">
+    <meta name="theme-color" content="#000000">
     <link rel="apple-touch-icon" href="/icons/icon-192.png">
-    
-    <!-- Meta tags para Windows -->
-    <meta name="msapplication-TileColor" content="#000000">
-    <meta name="msapplication-TileImage" content="/icons/icon-144.png">
-    
-    <!-- Favicon universal -->
-    <link rel="icon" type="image/png" sizes="32x32" href="/icons/favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="/icons/favicon-16x16.png">
-
-    <!-- Garantir HTTPS -->
-    <script>
-        if (window.location.protocol === 'http:' && !window.location.hostname.includes('localhost')) {
-            window.location.href = window.location.href.replace('http:', 'https:');
-        }
-    </script>
-
-    <style>
-        /* Reset CSS básico */
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        /* Estilos base */
-        html, body {
-            height: 100%;
-            width: 100%;
-            overflow-x: hidden;
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen-Sans, Ubuntu, Cantarell, 'Helvetica Neue', sans-serif;
-        }
-
-        /* Suporte para notch e áreas seguras */
-        @supports (padding: env(safe-area-inset-top)) {
-            body {
-                padding: env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left);
-            }
-        }
-
-        /* Estilo para o botão de instalação */
-        .install-button {
-            display: none;
-            position: fixed;
-            bottom: 20px;
-            left: 50%;
-            transform: translateX(-50%);
-            padding: 10px 20px;
-            background-color: #000;
-            color: white;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            z-index: 1000;
-        }
-    </style>
 </head>
 <body>
     <div id="app">
-        <!-- Seu conteúdo aqui -->
+        <header>
+            <h1>WhatsGo</h1>
+        </header>
+        <main>
+            <p>Bem-vindo ao WhatsGo - Seu aplicativo de comunicação</p>
+            <button id="installButton" style="display: none;">Instalar App</button>
+        </main>
     </div>
-
-    <!-- Botão de instalação universal -->
-    <button id="installButton" class="install-button">Instalar App</button>
-
-    <script src="/js/app.js" defer></script>
+    <script src="/js/app.js"></script>
 </body>
 </html>

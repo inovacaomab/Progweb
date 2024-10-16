@@ -2,7 +2,7 @@
   "name": "WhatsGo",
   "short_name": "WhatsGo",
   "description": "WhatsGo - Seu aplicativo de comunicação",
-  "start_url": "https://www.whatsgo.app.br/?source=pwa",
+  "start_url": "/?source=pwa",
   "display": "standalone",
   "orientation": "any",
   "background_color": "#FFFFFF",
@@ -64,7 +64,7 @@
   "shortcuts": [
     {
       "name": "Abrir WhatsGo",
-      "url": "https://www.whatsgo.app.br",
+      "url": "/",
       "icons": [{ "src": "/icons/icon-96.png", "sizes": "96x96" }]
     }
   ]

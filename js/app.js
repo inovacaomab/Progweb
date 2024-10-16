@@ -1,7 +1,7 @@
 // Configuração Universal do PWA
 const APP_CONFIG = {
-    mainUrl: 'https://www.whatsgo.app.br',
-    defaultRedirect: 'https://www.whatsgo.app.br'
+    mainUrl: '/',
+    defaultRedirect: '/'
 };
 
 // Utilitário para detectar ambiente
@@ -23,23 +23,19 @@ class InstallManager {
     }
 
     setupEventListeners() {
-        // Interceptar evento de instalação
         window.addEventListener('beforeinstallprompt', (e) => {
             e.preventDefault();
             this.deferredPrompt = e;
             this.showInstallButton();
         });
 
-        // Listener para o botão de instalação
         if (this.installButton) {
             this.installButton.addEventListener('click', () => this.installPWA());
         }
 
-        // Detectar quando o app foi instalado
         window.addEventListener('appinstalled', () => {
             this.hideInstallButton();
             this.deferredPrompt = null;
-            // Registrar instalação bem-sucedida
             console.log('PWA instalado com sucesso');
         });
     }
@@ -60,7 +56,6 @@ class InstallManager {
         if (!this.deferredPrompt) return;
 
         try {
-            // Mostrar prompt de instalação
             const result = await this.deferredPrompt.prompt();
             console.log(`Usuário ${result.outcome === 'accepted' ? 'aceitou' : 'recusou'} a instalação`);
             this.deferredPrompt = null;
@@ -77,25 +72,21 @@ class NavigationManager {
     }
 
     setupNavigationHandlers() {
-        // Interceptar cliques em links
         document.addEventListener('click', (e) => {
             const link = e.target.closest('a');
-            if (link) {
-                const url = new URL(link.href);
-                if (url.origin === window.location.origin) {
-                    e.preventDefault();
-                    this.navigateTo(url.href);
-                }
+            if (link && link.href.startsWith(window.location.origin)) {
+                e.preventDefault();
+                this.navigateTo(link.href);
             }
         });
 
-        // Lidar com mudanças de estado de conexão
         window.addEventListener('online', () => this.handleConnectionChange(true));
         window.addEventListener('offline', () => this.handleConnectionChange(false));
     }
 
     navigateTo(url) {
-        window.location.href = url;
+        history.pushState(null, '', url);
+        // Implemente aqui a lógica para atualizar o conteúdo da página
     }
 
     handleConnectionChange(isOnline) {
@@ -121,19 +112,16 @@ class ServiceWorkerManager {
 
 // Inicialização
 document.addEventListener('DOMContentLoaded', () => {
-    // Garantir HTTPS exceto em localhost
     if (!ENV.isHttps() && !ENV.isLocalhost()) {
         window.location.href = window.location.href.replace('http:', 'https:');
         return;
     }
 
-    // Inicializar gerenciadores
     new InstallManager();
     new NavigationManager();
     ServiceWorkerManager.register();
 
-    // Redirecionar para URL principal se necessário
-    if (ENV.isStandalone() && window.location.href !== APP_CONFIG.mainUrl) {
+    if (ENV.isStandalone() && window.location.pathname !== APP_CONFIG.mainUrl) {
         window.location.href = APP_CONFIG.mainUrl;
     }
 });
