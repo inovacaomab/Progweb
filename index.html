@@ -2,19 +2,52 @@
 <html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <title>WhatsGo PWA</title>
+    
+    <!-- Tags para PWA -->
     <link rel="manifest" href="manifest.json">
     <meta name="theme-color" content="#000000">
+    
+    <!-- Tags específicas para iOS -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-title" content="WhatsGo">
+    
+    <!-- Ícones para iOS -->
+    <link rel="apple-touch-icon" href="icon-192x192.png">
+    <link rel="apple-touch-icon" sizes="152x152" href="icon-152x152.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="icon-180x180.png">
+    <link rel="apple-touch-icon" sizes="167x167" href="icon-167x167.png">
+    
+    <!-- Splash screen para iOS -->
+    <link rel="apple-touch-startup-image" href="splash-2048x2732.png" sizes="2048x2732">
+    <link rel="apple-touch-startup-image" href="splash-1668x2224.png" sizes="1668x2224">
+    <link rel="apple-touch-startup-image" href="splash-1536x2048.png" sizes="1536x2048">
+    <link rel="apple-touch-startup-image" href="splash-1125x2436.png" sizes="1125x2436">
+    <link rel="apple-touch-startup-image" href="splash-1242x2208.png" sizes="1242x2208">
+    <link rel="apple-touch-startup-image" href="splash-750x1334.png" sizes="750x1334">
+    <link rel="apple-touch-startup-image" href="splash-640x1136.png" sizes="640x1136">
+    
     <link rel="stylesheet" href="styles.css">
+    
+    <!-- Prevenir cache durante o desenvolvimento -->
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Expires" content="0">
 </head>
 <body>
     <header>
         <h1>Bem-vindo ao WhatsGo</h1>
     </header>
     <main>
-        <p>Este é um exemplo simples de PWA para o WhatsGo.</p>
+        <p>Este é um exemplo de PWA para o WhatsGo.</p>
         <button id="install-button" style="display: none;">Instalar App</button>
+        <div id="install-ios" style="display: none;">
+            <p>Para instalar no iOS:</p>
+            <p>1. Toque no botão compartilhar</p>
+            <p>2. Role para baixo e toque em "Adicionar à Tela Inicial"</p>
+        </div>
     </main>
     <script src="app.js"></script>
 </body>

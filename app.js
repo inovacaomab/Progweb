@@ -1,35 +1,55 @@
-// Registrar o Service Worker
+// Detectar plataforma
+const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
+const installButton = document.getElementById('install-button');
+const iosInstallPrompt = document.getElementById('install-ios');
+
+// Registrar Service Worker
 if ('serviceWorker' in navigator) {
-    window.addEventListener('load', () => {
-        navigator.serviceWorker.register('service-worker.js')
-            .then(registration => {
-                console.log('Service Worker registrado com sucesso:', registration.scope);
-            })
-            .catch(error => {
-                console.log('Falha ao registrar o Service Worker:', error);
-            });
+    window.addEventListener('load', async () => {
+        try {
+            const registration = await navigator.serviceWorker.register('service-worker.js');
+            console.log('Service Worker registrado com sucesso:', registration.scope);
+        } catch (error) {
+            console.error('Erro ao registrar Service Worker:', error);
+        }
     });
 }
 
-// Lógica para o botão de instalação
+// Lógica para instalação no Android
 let deferredPrompt;
-const installButton = document.getElementById('install-button');
 
 window.addEventListener('beforeinstallprompt', (e) => {
     e.preventDefault();
     deferredPrompt = e;
-    installButton.style.display = 'block';
+    
+    // Mostrar o botão de instalação apenas para Android
+    if (!isIOS) {
+        installButton.style.display = 'block';
+    }
 });
 
-installButton.addEventListener('click', (e) => {
+installButton.addEventListener('click', async (e) => {
+    if (!deferredPrompt) return;
+    
     installButton.style.display = 'none';
     deferredPrompt.prompt();
-    deferredPrompt.userChoice.then((choiceResult) => {
-        if (choiceResult.outcome === 'accepted') {
-            console.log('Usuário aceitou a instalação do A2HS');
-        } else {
-            console.log('Usuário recusou a instalação do A2HS');
-        }
-        deferredPrompt = null;
-    });
+    
+    const { outcome } = await deferredPrompt.userChoice;
+    console.log(`Usuário ${outcome === 'accepted' ? 'aceitou' : 'recusou'} a instalação`);
+    deferredPrompt = null;
+});
+
+// Lógica para instalação no iOS
+if (isIOS) {
+    // Verificar se já está instalado
+    if (!navigator.standalone) {
+        iosInstallPrompt.style.display = 'block';
+    }
+}
+
+// Detectar quando o app foi instalado com sucesso
+window.addEventListener('appinstalled', (evt) => {
+    console.log('App instalado com sucesso!');
+    installButton.style.display = 'none';
+    iosInstallPrompt.style.display = 'none';
 });
