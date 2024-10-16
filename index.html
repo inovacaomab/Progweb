@@ -2,53 +2,84 @@
 <html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
-    <title>WhatsGo PWA</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>WhatsGo</title>
     
-    <!-- Tags para PWA -->
-    <link rel="manifest" href="manifest.json">
+    <!-- Meta tags universais -->
+    <meta name="description" content="WhatsGo - Seu aplicativo de comunicação">
     <meta name="theme-color" content="#000000">
-    
-    <!-- Tags específicas para iOS -->
+    <meta name="mobile-web-app-capable" content="yes">
+    <link rel="manifest" href="/manifest.json">
+
+    <!-- Meta tags para iOS -->
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black">
     <meta name="apple-mobile-web-app-title" content="WhatsGo">
+    <link rel="apple-touch-icon" href="/icons/icon-192.png">
     
-    <!-- Ícones para iOS -->
-    <link rel="apple-touch-icon" href="icon-192x192.png">
-    <link rel="apple-touch-icon" sizes="152x152" href="icon-152x152.png">
-    <link rel="apple-touch-icon" sizes="180x180" href="icon-180x180.png">
-    <link rel="apple-touch-icon" sizes="167x167" href="icon-167x167.png">
+    <!-- Meta tags para Windows -->
+    <meta name="msapplication-TileColor" content="#000000">
+    <meta name="msapplication-TileImage" content="/icons/icon-144.png">
     
-    <!-- Splash screen para iOS -->
-    <link rel="apple-touch-startup-image" href="splash-2048x2732.png" sizes="2048x2732">
-    <link rel="apple-touch-startup-image" href="splash-1668x2224.png" sizes="1668x2224">
-    <link rel="apple-touch-startup-image" href="splash-1536x2048.png" sizes="1536x2048">
-    <link rel="apple-touch-startup-image" href="splash-1125x2436.png" sizes="1125x2436">
-    <link rel="apple-touch-startup-image" href="splash-1242x2208.png" sizes="1242x2208">
-    <link rel="apple-touch-startup-image" href="splash-750x1334.png" sizes="750x1334">
-    <link rel="apple-touch-startup-image" href="splash-640x1136.png" sizes="640x1136">
-    
-    <link rel="stylesheet" href="styles.css">
-    
-    <!-- Prevenir cache durante o desenvolvimento -->
-    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
-    <meta http-equiv="Pragma" content="no-cache">
-    <meta http-equiv="Expires" content="0">
+    <!-- Favicon universal -->
+    <link rel="icon" type="image/png" sizes="32x32" href="/icons/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/icons/favicon-16x16.png">
+
+    <!-- Garantir HTTPS -->
+    <script>
+        if (window.location.protocol === 'http:' && !window.location.hostname.includes('localhost')) {
+            window.location.href = window.location.href.replace('http:', 'https:');
+        }
+    </script>
+
+    <style>
+        /* Reset CSS básico */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        /* Estilos base */
+        html, body {
+            height: 100%;
+            width: 100%;
+            overflow-x: hidden;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen-Sans, Ubuntu, Cantarell, 'Helvetica Neue', sans-serif;
+        }
+
+        /* Suporte para notch e áreas seguras */
+        @supports (padding: env(safe-area-inset-top)) {
+            body {
+                padding: env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left);
+            }
+        }
+
+        /* Estilo para o botão de instalação */
+        .install-button {
+            display: none;
+            position: fixed;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            padding: 10px 20px;
+            background-color: #000;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            z-index: 1000;
+        }
+    </style>
 </head>
 <body>
-    <header>
-        <h1>Bem-vindo ao WhatsGo</h1>
-    </header>
-    <main>
-        <p>Este é um exemplo de PWA para o WhatsGo.</p>
-        <button id="install-button" style="display: none;">Instalar App</button>
-        <div id="install-ios" style="display: none;">
-            <p>Para instalar no iOS:</p>
-            <p>1. Toque no botão compartilhar</p>
-            <p>2. Role para baixo e toque em "Adicionar à Tela Inicial"</p>
-        </div>
-    </main>
-    <script src="app.js"></script>
+    <div id="app">
+        <!-- Seu conteúdo aqui -->
+    </div>
+
+    <!-- Botão de instalação universal -->
+    <button id="installButton" class="install-button">Instalar App</button>
+
+    <script src="/js/app.js" defer></script>
 </body>
 </html>
